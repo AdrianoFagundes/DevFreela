@@ -1,3 +1,4 @@
+using DevFreela.API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,11 @@ namespace DevFreela.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            //Obtendo o JSON de Configuração
+            services.Configure<AppOption>(Configuration.GetSection("AppOptions"));
+            //services.AddSingleton(c => new TesteInjecaoDependencia { Mensagem = "Mensagem de Teste Singleton" }); 
+            services.AddScoped<TesteInjecaoDependencia>(c => new TesteInjecaoDependencia { Mensagem = "Mensagem de Teste Scoped" });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
