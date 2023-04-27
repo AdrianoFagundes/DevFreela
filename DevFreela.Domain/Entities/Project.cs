@@ -31,5 +31,35 @@ namespace DevFreela.Domain.Entities
         public DateTime FinishedAt { get; private set; }
         public ProjectStatusEnum Status { get; private set; }
         public List<ProjectComment> ProjectComments { get; private set; }
+        public void CancelProject()
+        {
+            if (Status == ProjectStatusEnum.InProgress || Status == ProjectStatusEnum.Created) 
+            {
+                Status = ProjectStatusEnum.Cancelled;
+            }
+        }
+        public void FinishProject()
+        {
+            if (Status == ProjectStatusEnum.InProgress)
+            {
+                Status = ProjectStatusEnum.Finished;
+                FinishedAt = DateTime.Now;
+            }
+        }
+        public void StartProject()
+        {
+            if (Status == ProjectStatusEnum.Created)
+            {
+                Status = ProjectStatusEnum.InProgress;
+                StartedAt = DateTime.Now;
+            }
+        }
+
+        public void UpdateProject(string title, string description, decimal totalCost)
+        {
+            Title = title;
+            Description = description;
+            TotalCost = totalCost;
+        }
     }
 }

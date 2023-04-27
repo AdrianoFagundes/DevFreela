@@ -31,7 +31,7 @@ namespace DevFreela.API
             //Obtendo o JSON de Configuração
             services.Configure<AppOption>(Configuration.GetSection("AppOptions"));
             //services.AddSingleton(c => new TesteInjecaoDependencia { Mensagem = "Mensagem de Teste Singleton" }); 
-            services.AddScoped<TesteInjecaoDependencia>(c => new TesteInjecaoDependencia { Mensagem = "Mensagem de Teste Scoped" });
+            services.AddScoped(c => new TesteInjecaoDependencia { Mensagem = "Mensagem de Teste Scoped" });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
